@@ -9,8 +9,8 @@ namespace BlockchainPrototype.Networking.p2p
 {
     public class Peer2PeerConfig
     {
-        public IPAddress Ip { get; set; }
-        public int Port { get; set; }
+        public string Ip = "127.0.0.1";
+        public int Port = 5001;
 
     }
 }
