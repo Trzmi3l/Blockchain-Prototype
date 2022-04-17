@@ -20,7 +20,7 @@ namespace BlockchainPrototype
 
             // run database
             initDb();
-
+            DbManager.GetBlock(0);
             Console.ReadKey();
         }
 

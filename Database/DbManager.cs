@@ -1,4 +1,5 @@
-﻿using BlockchainPrototype.Models;
+﻿using BlockchainPrototype.Exceptions;
+using BlockchainPrototype.Models;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
 using System;
@@ -69,13 +70,21 @@ namespace BlockchainPrototype.Database
             string temp = File.ReadAllText(file.FullName);
             return JsonConvert.DeserializeObject<Block>(temp);
         }
+        
         /// <summary>
         /// Get block of height
         /// </summary>
         public Block GetBlock(long height)
         {
-            string temp = File.ReadAllText(PATH + DB_NAME + "/" + "Blocks" + "/" + height + ".json");
-            return JsonConvert.DeserializeObject<Block>(temp);
+            try
+            {
+                string temp = File.ReadAllText(PATH + DB_NAME + "/" + "Blocks" + "/" + height + ".json");
+                return JsonConvert.DeserializeObject<Block>(temp);
+            } catch(FileNotFoundException ex)
+            {
+                return null;
+            }
+            
         }
  
     }   
