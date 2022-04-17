@@ -1,5 +1,6 @@
 ﻿using BlockchainPrototype.Models;
 using Microsoft.Data.Sqlite;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 
 namespace BlockchainPrototype.Database
@@ -37,25 +40,42 @@ namespace BlockchainPrototype.Database
 
         public void InsertBlock(Block _)
         {
-            FileStream fs = new FileStream(PATH + DB_NAME + "/"  + "Blocks/" + _.Height + ".dat", FileMode.Create);
-            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream fs = new FileStream(PATH + DB_NAME + "/"  + "Blocks/" + _.Height + ".json", FileMode.Create);
+
             try
             {
-                formatter.Serialize(fs, _);
+                string dataToBinary = System.Text.Json.JsonSerializer.Serialize(_);
+                fs.Write(Encoding.UTF8.GetBytes(dataToBinary));
             } 
             catch(SerializationException ex)
             {
                 Console.WriteLine("Failed to serialize block");
-
-            } 
-            finally
+                Console.WriteLine(ex.ToString());
+            }finally
             {
                 fs.Close();
             }
         }
 
+
+        /// <summary>
+        /// Get latest block
+        /// </summary>
+        /// <returns>Block</returns>
+        public Block GetBlock()
+        {
+            DirectoryInfo df = new DirectoryInfo(PATH + DB_NAME + "/" + "Blocks");
+            FileInfo file = df.GetFiles().OrderByDescending(f => f.LastWriteTime).First();
+
+            string temp = File.ReadAllText(file.FullName);
+
+            Block block = JsonConvert.DeserializeObject<Block>(temp);
+            Console.WriteLine(block.Hash);
+            return block;
+        }
+
  
-    }
+    }   
 }
 
 

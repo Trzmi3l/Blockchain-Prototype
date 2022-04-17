@@ -21,8 +21,6 @@ namespace BlockchainPrototype
             // run database
             initDb();
 
-            DbManager.InsertBlock(new Models.Block() { BlockReward=1, Difficulty=1,Hash="terst", HashSet=null, Height=0, PrevHash=null, ResolveHash=null, Shares=null, Transactions=null });
-
             Console.ReadKey();
         }
 
