@@ -66,14 +66,17 @@ namespace BlockchainPrototype.Database
         {
             DirectoryInfo df = new DirectoryInfo(PATH + DB_NAME + "/" + "Blocks");
             FileInfo file = df.GetFiles().OrderByDescending(f => f.LastWriteTime).First();
-
             string temp = File.ReadAllText(file.FullName);
-
-            Block block = JsonConvert.DeserializeObject<Block>(temp);
-            Console.WriteLine(block.Hash);
-            return block;
+            return JsonConvert.DeserializeObject<Block>(temp);
         }
-
+        /// <summary>
+        /// Get block of height
+        /// </summary>
+        public Block GetBlock(long height)
+        {
+            string temp = File.ReadAllText(PATH + DB_NAME + "/" + "Blocks" + "/" + height + ".json");
+            return JsonConvert.DeserializeObject<Block>(temp);
+        }
  
     }   
 }
