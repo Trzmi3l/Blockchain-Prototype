@@ -25,6 +25,10 @@ namespace BlockchainPrototype.Chain
 
 
 
+        static void DumpChain()
+        {
+            
+        }
 
         public Block GetLastBlock()
         {

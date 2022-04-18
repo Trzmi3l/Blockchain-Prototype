@@ -18,7 +18,7 @@ namespace BlockchainPrototype.Models
         public List<Share> Shares { get; set; }
         public List<string> HashSet { get; set; }
         public decimal BlockReward { get; set; }
-
+        public DateTime timestamp { get; set; }
     }
     public static class BlockExtensions
     {

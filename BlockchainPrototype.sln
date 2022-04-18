@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockchainPrototype", "BlockchainPrototype.csproj", "{BBFF5F7C-3992-409F-B4FA-B210C2B74221}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiningSoftware", "..\MiningSoftware\MiningSoftware.csproj", "{4FAB3626-EE02-465E-B167-A269075237AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiningSoftware", "..\MiningSoftware\MiningSoftware.csproj", "{4FAB3626-EE02-465E-B167-A269075237AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet", "..\Wallet\Wallet.csproj", "{7A200344-958F-4CF6-987E-5A048CC335A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4FAB3626-EE02-465E-B167-A269075237AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FAB3626-EE02-465E-B167-A269075237AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FAB3626-EE02-465E-B167-A269075237AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A200344-958F-4CF6-987E-5A048CC335A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A200344-958F-4CF6-987E-5A048CC335A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A200344-958F-4CF6-987E-5A048CC335A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A200344-958F-4CF6-987E-5A048CC335A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
