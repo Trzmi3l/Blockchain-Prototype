@@ -43,11 +43,12 @@ namespace BlockchainPrototype.Networking.p2p
                 i = stream.Read(bytes, 0, bytes.Length);
                 while(i != 0)
                 {
-                    Console.WriteLine("Data recieved");
                     data = System.Text.Encoding.UTF8.GetString(bytes);
+                    stream.Write(Encoding.UTF8.GetBytes("sralnik"));
                     Console.WriteLine(data);
                     i = 0;
                 }
+                Console.WriteLine(i);
             }
         }
 

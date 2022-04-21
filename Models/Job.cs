@@ -11,5 +11,6 @@ namespace BlockchainPrototype.Models
     {
         public string Id { get; set; }
         public long blockHeight { get; set; }
+        public Block data { get; set; }
     }
 }

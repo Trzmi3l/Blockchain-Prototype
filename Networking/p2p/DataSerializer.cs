@@ -1,4 +1,5 @@
 ﻿using BlockchainPrototype.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,18 @@ namespace BlockchainPrototype.Networking.p2p
 {
     public class DataSerializer
     {
-
-        public static byte[] SerializeData(object _)
+        /// <summary>
+        /// Serializes Job Packet
+        /// </summary>
+        /// <param name="_">Job object</param>
+        /// <returns></returns>
+        public static byte[] SerializeData(Job _)
         {
             if (_ == null) return null;
 
+            string packet = JsonConvert.SerializeObject(_);
+            Console.WriteLine(packet);
+            return Encoding.UTF8.GetBytes(packet);
 
         }
 

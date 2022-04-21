@@ -20,7 +20,18 @@ namespace BlockchainPrototype
 
             // run database
             initDb();
-            DbManager.GetBlock(0);
+            
+
+            DataSerializer.SerializeData(new Models.Job()
+            {
+                blockHeight = 0,
+                data = DbManager.GetBlock(),
+                Id = "589346"
+            });
+
+
+
+
             Console.ReadKey();
         }
 
