@@ -1,4 +1,5 @@
-﻿using BlockchainPrototype.Database;
+﻿using System.Text;
+using BlockchainPrototype.Database;
 using BlockchainPrototype.Networking.p2p;
 using System;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ namespace BlockchainPrototype
 {
     internal class Program
     {
+        
         static Networking.EmbedServer webapiServer;
         static Peer2Peer P2PServer;
         static DbManager DbManager;
