@@ -22,7 +22,6 @@ namespace BlockchainPrototype
 
             // run database
             initDb();
-            
 
             DataSerializer.SerializeData(new Models.Job()
             {

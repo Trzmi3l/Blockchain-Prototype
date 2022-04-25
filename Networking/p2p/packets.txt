@@ -1,0 +1,5 @@
+﻿
+
+
+BLOCK REQUEST (string prefix : "2c440fx0:") - 
+block to json to byte64 to byte[]

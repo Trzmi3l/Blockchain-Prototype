@@ -1,4 +1,7 @@
-﻿using BlockchainPrototype.Networking.enums;
+﻿using BlockchainPrototype.Chain;
+using BlockchainPrototype.Models;
+using BlockchainPrototype.Networking.enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +37,14 @@ namespace BlockchainPrototype.Networking.p2p
             
             // recognise packet
 
+            if(recieveString.StartsWith("2c440fx0:"))
+            {
+                string temp = recieveString.Substring("2c440fx0:".Length + 1);
+                Task.Run(() => SerializeAndSendResponseData(PacketType.BLOCK, Blockchain.GetLastBlock(), e));
+            }
+            
+
+
             mesageRevieved = true;
         }
 
@@ -49,7 +60,25 @@ namespace BlockchainPrototype.Networking.p2p
             u.BeginReceive(new AsyncCallback(RecieveCallback), s);
         }
 
+        static void SerializeAndSendResponseData(PacketType type, Block block, IPEndPoint ep)
+        {
 
-       
+            UdpClient client = new UdpClient();
+            client.Connect(ep.Address.ToString(), 5001);
+
+            switch (type)
+            {
+                case PacketType.BLOCK:
+
+                    string temp = "2c440fx0:" + JsonConvert.SerializeObject(block);
+
+                    byte[] tempBytes = Encoding.ASCII.GetBytes(temp);
+                    client.Send(tempBytes, tempBytes.Length);
+                    
+                    break;
+            }
+
+        }
+
     }
 }

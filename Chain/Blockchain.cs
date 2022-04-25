@@ -30,11 +30,11 @@ namespace BlockchainPrototype.Chain
             
         }
 
-        public Block GetLastBlock()
+        public static Block GetLastBlock()
         {
             return CHAIN.LastOrDefault();
         }
-        public List<Block> GetLast50Blocks()
+        public static List<Block> GetLast50Blocks()
         {
             return (List<Block>)CHAIN.Skip(Math.Max(0, CHAIN.Count - 50));
         }
