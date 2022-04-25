@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlockchainPrototype.Networking.enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,78 +11,45 @@ namespace BlockchainPrototype.Networking.p2p
 {
     public class Peer2Peer
     {
-        static TcpClient server;
-        static TcpListener listener;
-        static NetworkStream stream;
-        static bool recievePackets = true;
-
-        public Peer2Peer(Peer2PeerConfig config)
+        public Peer2Peer()
         {
-            Console.WriteLine("Initializing p2p");
-            listener = new TcpListener(IPAddress.Parse(config.Ip), config.Port);
-            StartListener();
-            InitPeer2Peer();
-            Task.Run(() => RecieveLoop());
+            Task.Run(() => RecieveMessages());
         }
 
-        static async Task InitPeer2Peer()
+        public struct UdpState
         {
-           server = listener.AcceptTcpClient();
-           stream = server.GetStream();
-        
+            public UdpClient u;
+            public IPEndPoint e;
         }
 
-        static async Task RecieveLoop()
-        {
-            Console.WriteLine("Recieving loop running");
-            byte[] bytes = new byte[4096];
-            string data;
-            int i = 0;
+        public static bool mesageRevieved = false;
 
-            while(recievePackets)
-            {
-                i = stream.Read(bytes, 0, bytes.Length);
-                while(i != 0)
-                {
-                    data = System.Text.Encoding.UTF8.GetString(bytes);
-                    stream.Write(Encoding.UTF8.GetBytes("sralnik"));
-                    Console.WriteLine(data);
-                    i = 0;
-                }
-                Console.WriteLine(i);
-            }
+        public static void RecieveCallback(IAsyncResult ar)
+        {
+            UdpClient u = ((UdpState)(ar.AsyncState)).u;
+            IPEndPoint e = ((UdpState)(ar.AsyncState)).e;
+
+            byte[] recieveBytes = u.EndReceive(ar, ref e);
+            string recieveString = Encoding.ASCII.GetString(recieveBytes);
+            
+            // recognise packet
+
+            mesageRevieved = true;
         }
 
-        public void StopRecieving()
+        static void RecieveMessages()
         {
-            recievePackets = false;
-        }
-        public void StartRecieving()
-        {
-            recievePackets = true;
+            IPEndPoint e = new IPEndPoint(IPAddress.Any, 5001);
+            UdpClient u = new UdpClient(e);
+
+            UdpState s = new UdpState();
+            s.e = e;
+            s.u = u;
+
+            u.BeginReceive(new AsyncCallback(RecieveCallback), s);
         }
 
-        public async Task<Boolean> StartListener()
-        {
-            try
-            {
-                listener.Start();
-                return true;
-            } catch(Exception e)
-            {
-                return false;
-            }
-        }
-        public async Task<Boolean> StopListener()
-        {
-            try
-            {
-                listener.Stop();
-                return true;
-            } catch(Exception e)
-            {
-                return false;
-            }
-        }
+
+       
     }
 }

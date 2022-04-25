@@ -18,13 +18,12 @@ namespace BlockchainPrototype.Networking.p2p
         public static byte[] SerializeData(Job _)
         {
             if (_ == null) return null;
-
             string packet = JsonConvert.SerializeObject(_);
             Console.WriteLine(packet);
             return Encoding.UTF8.GetBytes(packet);
 
         }
-
+                
 
     }
 }

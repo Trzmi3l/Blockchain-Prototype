@@ -43,7 +43,7 @@ namespace BlockchainPrototype
         }
         static void initP2PServer()
         {
-            P2PServer = new Peer2Peer(new Peer2PeerConfig());
+            P2PServer = new Peer2Peer();
         }
         static void initEmbedServer()
         {
