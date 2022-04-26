@@ -1,6 +1,5 @@
 ﻿using BlockchainPrototype.Exceptions;
 using BlockchainPrototype.Models;
-using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

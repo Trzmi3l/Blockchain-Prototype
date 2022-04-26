@@ -34,7 +34,7 @@ namespace BlockchainPrototype.Networking.p2p
 
             byte[] recieveBytes = u.EndReceive(ar, ref e);
             string recieveString = Encoding.ASCII.GetString(recieveBytes);
-            
+            Console.WriteLine(recieveString);
             // recognise packet
 
             if(recieveString.StartsWith("2c440fx0:"))
@@ -56,8 +56,10 @@ namespace BlockchainPrototype.Networking.p2p
             UdpState s = new UdpState();
             s.e = e;
             s.u = u;
-
-            u.BeginReceive(new AsyncCallback(RecieveCallback), s);
+            for (;;)
+            {
+                u.BeginReceive(new AsyncCallback(RecieveCallback), s);
+            }
         }
 
         static void SerializeAndSendResponseData(PacketType type, Block block, IPEndPoint ep)
