@@ -14,6 +14,7 @@ namespace BlockchainPrototype.Models
         public int Height { get; set; }
         public int Difficulty { get; set; }
         public List<Transaction> Transactions { get; set; }
+        public long nonce { get; set; }
         public Share ResolveHash { get; set; }
         public List<Share> Shares { get; set; }
         public List<string> HashSet { get; set; }

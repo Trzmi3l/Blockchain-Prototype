@@ -10,14 +10,7 @@ namespace BlockchainPrototype.Models
     {
         public Address From { get; set; }
         public Address To { get; set; }
-        
-        public decimal value;
-
-       public bool verify()
-        {
-            if (From.balance >= value) return true;
-            return false;
-        }
-
+        public decimal value { get; set; }  
+        public DateTime TimeSpan { get; set; }
     }
 }
